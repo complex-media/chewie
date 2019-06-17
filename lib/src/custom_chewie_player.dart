@@ -141,21 +141,27 @@ class _ChewiePlayerState extends State<Chewie> {
   Widget _buildFullScreenVideo(
       BuildContext context, Animation<double> animation) {
     videoContext = context;
-    return new Scaffold(
-      resizeToAvoidBottomPadding: false,
-      body: new Container(
-        alignment: Alignment.center,
-        color: Colors.black,
-        child: new PlayerWithControls(
-          controller: _controller,
-          onExpandCollapse: () {
-            new Future<dynamic>.value(Navigator.of(context).pop());
-            leaveFullscreen = true;
-          },
-          aspectRatio: widget.aspectRatio ?? _calculateAspectRatio(context),
-          fullScreen: true,
-          cupertinoProgressColors: widget.cupertinoProgressColors,
-          materialProgressColors: widget.materialProgressColors,
+    return WillPopScope(
+      onWillPop: () {
+        new Future<dynamic>.value(Navigator.of(context).pop());
+        leaveFullscreen = true;
+      },
+      child: new Scaffold(
+        resizeToAvoidBottomPadding: false,
+        body: new Container(
+          alignment: Alignment.center,
+          color: Colors.black,
+          child: new PlayerWithControls(
+            controller: _controller,
+            onExpandCollapse: () {
+              new Future<dynamic>.value(Navigator.of(context).pop());
+              leaveFullscreen = true;
+            },
+            aspectRatio: widget.aspectRatio ?? _calculateAspectRatio(context),
+            fullScreen: true,
+            cupertinoProgressColors: widget.cupertinoProgressColors,
+            materialProgressColors: widget.materialProgressColors,
+          ),
         ),
       ),
     );
