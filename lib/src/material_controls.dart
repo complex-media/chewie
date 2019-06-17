@@ -44,6 +44,9 @@ class _MaterialControlsState extends State<MaterialControls> {
 
   @override
   Widget build(BuildContext context) {
+    final Orientation orientation = MediaQuery.of(context).orientation;
+    final bool _isLandscape = orientation == Orientation.landscape;
+
     return Stack(children: <Widget>[
       new AnimatedOpacity(
         opacity: _hideStuff ? 0.0 : 1.0,
@@ -67,17 +70,15 @@ class _MaterialControlsState extends State<MaterialControls> {
           _buildBottomBar(context, widget.controller),
         ],
       ),
-      _hideStuff
+      _hideStuff || !_isLandscape
           ? new Container()
           : new IconButton(
               icon: new Icon(
-                Icons.arrow_back,
+                Icons.arrow_back_ios,
                 color: Colors.white,
               ),
               onPressed: () async {
-                print("pressed true");
-                widget.controller.pause();
-                Navigator.pop(context);
+                _onExpandCollapse();
               },
             ),
     ]);
