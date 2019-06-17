@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:custom_chewie/src/custom_chewie_progress_colors.dart';
 import 'package:custom_chewie/src/player_with_controls.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:video_player/video_player.dart';
@@ -103,7 +104,9 @@ class _ChewiePlayerState extends State<Chewie> {
       setState(() {
         playerHeight = 0.0;
       });
-      _pushFullScreenWidget(context);
+      SchedulerBinding.instance.addPostFrameCallback(
+         (_) => _pushFullScreenWidget(context)
+      );
       wasLandscape = true;
     } else if (!_isLandscape && wasLandscape && !leaveFullscreen) {
       // End fullscreen mode
