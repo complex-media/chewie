@@ -161,6 +161,7 @@ class _ChewiePlayerState extends State<Chewie> {
             fullScreen: true,
             cupertinoProgressColors: widget.cupertinoProgressColors,
             materialProgressColors: widget.materialProgressColors,
+            autoPlay: widget.autoPlay,
           ),
         ),
       ),

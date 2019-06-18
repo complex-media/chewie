@@ -74,7 +74,7 @@ class _MaterialControlsState extends State<MaterialControls> {
           ? new Container()
           : new IconButton(
               icon: new Icon(
-                Icons.arrow_back_ios,
+                Icons.arrow_back,
                 color: Colors.white,
               ),
               onPressed: () async {
